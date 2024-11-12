@@ -9,13 +9,13 @@ List<string> wordsToGuess = new List<string>
 
 };
 var validCharacters = new Regex("^[A-Z]$");
-int attempts = 10;
+int lives = 10;
 List<string> letters = new();
 Random random = new Random();
 int wordIndex = random.Next(wordsToGuess.Count);
 int missingChars = 0; 
 string wordToGuess = wordsToGuess[wordIndex].ToUpper();
-void GetWord(char word)
+void GetWord()
 {
     foreach (char character in wordToGuess)
     {
@@ -23,7 +23,6 @@ void GetWord(char word)
         if (letters.Contains(letter))
         {
             Console.Write(letter);
-            missingChars--;
         }
         else
         {
@@ -31,13 +30,17 @@ void GetWord(char word)
             missingChars++;
         }
     }
-   
+    Console.WriteLine();
 }
 
 do
 {
-    Console.Write("Inserisci una lettera: ");
-    char word = (char)Console.Read();
-    GetWord(word);
+    GetWord();
+    Console.WriteLine("Inserisci una lettera: ");
+    string word = Console.ReadKey().Key.ToString().ToUpper();
+    Console.WriteLine();
+    letters.Add(word);
+    if (!wordToGuess.Contains(word))
+        lives--;
 }
-while (true);
+while (lives > 0);
