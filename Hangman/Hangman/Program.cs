@@ -17,6 +17,7 @@ int missingChars = 0;
 string wordToGuess = wordsToGuess[wordIndex].ToUpper();
 void GetWord()
 {
+    Console.WriteLine($"Ti rimangono {lives} vite.");
     foreach (char character in wordToGuess)
     {
         string letter = character.ToString();
