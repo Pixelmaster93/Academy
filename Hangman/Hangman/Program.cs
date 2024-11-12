@@ -15,17 +15,29 @@ Random random = new Random();
 int wordIndex = random.Next(wordsToGuess.Count);
 int missingChars = 0; 
 string wordToGuess = wordsToGuess[wordIndex].ToUpper();
-foreach (char character in wordToGuess)
+void GetWord(char word)
 {
-    string letter = character.ToString();
-    if (letters.Contains(letter))
+    foreach (char character in wordToGuess)
     {
-        Console.Write(letter);
-        missingChars--;
+        string letter = character.ToString();
+        if (letters.Contains(letter))
+        {
+            Console.Write(letter);
+            missingChars--;
+        }
+        else
+        {
+            Console.Write("_ ");
+            missingChars++;
+        }
     }
-    else
-    {
-        Console.Write("_ ");
-        missingChars++;
-    }
+   
 }
+
+do
+{
+    Console.Write("Inserisci una lettera: ");
+    char word = (char)Console.Read();
+    GetWord(word);
+}
+while (true);
